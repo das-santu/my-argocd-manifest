@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: webapp-deploy
 spec:
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -14,7 +14,16 @@ spec:
         app: webapp
     spec:
       containers:
-        - image: santu440/devops-python-app:1.0.2
+        - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
           name: webapp
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: NODE_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
           ports:
-            - containerPort: 5000
+            - containerPort: 80
