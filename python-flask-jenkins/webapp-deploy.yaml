@@ -14,7 +14,7 @@ spec:
         app: webapp
     spec:
       containers:
-        - image: santu440/devops-python-app:1.0.2
+        - image: santu440/devops-python-app:1.0.3
           name: webapp
           env:
             - name: POD_IP
